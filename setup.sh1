@@ -7,9 +7,10 @@ helm init --service-account tiller --upgrade
 
 echo "Installing prometheus..."
 # helm del --purge prometheus
-helm install stable/prometheus --name prometheus --namespace prometheus --set rbac.create=true
+helm install stable/prometheus --name prometheus --namespace prometheus 
 
-open http://prometheus-prometheus-server.prometheus.svc.cluster.local
+kubectl get pods -n prometheus
+kubectl port-forward prometheus-server-6488f6c4cd-sdjv6 -n prometheus 9090:9090
 
 echo "Installing grafana..."
 # helm del --purge grafana
@@ -18,5 +19,5 @@ helm install stable/grafana --name grafana --namespace grafana
 # if any thing changed on grafa, run the following to upgrade with same release name
 helm upgrade grafana stable/grafana 
 
-kubectl get pods -n grafana 
-kubectl port-forward grafana-cb9886fd7-9kmq4 -n grafana 3000:3000
+kubectl get pods -n grafana --watch
+kubectl port-forward grafana-cb9886fd7-rrvqk -n grafana 3000:3000

@@ -88,16 +88,16 @@ affinity: {}
 ##
 persistence:
   enabled: false
-  # storageClassName: default
+  storageClassName: "managed-premium"
   # accessModes:
   #   - ReadWriteOnce
-  # size: 10Gi
+  size: 16Gi
   # annotations: {}
   # subPath: ""
   # existingClaim:
 
-adminUser: admin
-# adminPassword: strongpassword
+adminUser: grafana
+adminPassword: grafana
 
 ## Use an alternate scheduler, e.g. "stork".
 ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
